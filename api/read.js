@@ -70,7 +70,7 @@ async function meReadPostRoute(req, res) {
   return res.status(201).json(result.rows[0]);
 }
 
-async function meReadDeleteRoute(req, res) {
+async function meReadGetRoute(req, res) {
   const { id: bookId } = req.params;
   const { id: userId } = req.user;
 
