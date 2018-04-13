@@ -84,7 +84,7 @@ async function meReadDeleteRoute(req, res) {
     return res.status(404).json({ error: 'Read entry not found' });
   }
 
-  const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $1', [readId, userId]);
+  const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $2', [readId, userId]);
 
   return res.status(200).json(get);
 }
