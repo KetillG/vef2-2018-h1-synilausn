@@ -24,6 +24,7 @@ const {
   userReadRoute,
   meReadRoute,
   meReadPostRoute,
+  meReadGetRoute,
   meReadDeleteRoute,
 } = require('./read');
 
@@ -71,6 +72,7 @@ router.patch('/books/:id', requireAuth, catchErrors(bookPatchRoute));
 router.get('/users/me/read', requireAuth, catchErrors(meReadRoute));
 router.get('/users/:id/read', requireAuth, catchErrors(userReadRoute));
 router.post('/users/me/read', requireAuth, catchErrors(meReadPostRoute));
+router.get('/users/me/read/:id', requireAuth, catchErrors(meReadGetRoute));
 router.delete('/users/me/read/:id', requireAuth, catchErrors(meReadDeleteRoute));
 
 module.exports = router;

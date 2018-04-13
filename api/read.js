@@ -84,6 +84,25 @@ async function meReadDeleteRoute(req, res) {
     return res.status(404).json({ error: 'Read entry not found' });
   }
 
+  const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $1', [readId, userId]);
+
+  return res.status(200).json(get);
+}
+
+async function meReadDeleteRoute(req, res) {
+  const { id: readId } = req.params;
+  const { id: userId } = req.user;
+
+  const user = await findById(userId);
+
+  if (user === null) {
+    return res.status(404).json({ error: 'You not found' });
+  }
+
+  if (!Number.isInteger(Number(readId))) {
+    return res.status(404).json({ error: 'Read entry not found' });
+  }
+
   const del = await query('DELETE FROM read_books WHERE id = $1', [readId]);
 
   if (del.rowCount === 1) {
@@ -97,5 +116,6 @@ module.exports = {
   userReadRoute,
   meReadRoute,
   meReadPostRoute,
+  meReadGetRoute,
   meReadDeleteRoute,
 };
