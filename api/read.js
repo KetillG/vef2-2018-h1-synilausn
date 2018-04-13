@@ -71,7 +71,7 @@ async function meReadPostRoute(req, res) {
 }
 
 async function meReadDeleteRoute(req, res) {
-  const { id: readId } = req.params;
+  const { id: bookId } = req.params;
   const { id: userId } = req.user;
 
   const user = await findById(userId);
@@ -80,11 +80,11 @@ async function meReadDeleteRoute(req, res) {
     return res.status(404).json({ error: 'You not found' });
   }
 
-  if (!Number.isInteger(Number(readId))) {
+  if (!Number.isInteger(Number(bookId))) {
     return res.status(404).json({ error: 'Read entry not found' });
   }
 
-  const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $2', [readId, userId]);
+  const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $2', [bookId, userId]);
 
   return res.status(200).json(get);
 }
