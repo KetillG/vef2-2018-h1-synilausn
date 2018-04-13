@@ -86,7 +86,7 @@ async function meReadGetRoute(req, res) {
 
   const get = await query('SELECT * FROM read_books WHERE book_id = $1 AND user_id = $2', [bookId, userId]);
 
-  return res.status(200).json(get);
+  return res.status(200).json(get.rows);
 }
 
 async function meReadDeleteRoute(req, res) {
